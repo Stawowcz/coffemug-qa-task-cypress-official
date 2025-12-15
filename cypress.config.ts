@@ -13,6 +13,7 @@ module.exports = defineConfig({
       openMode: 0,
     },
 
+    downloadsFolder: "cypress/downloads",
     screenshotsFolder: "cypress/screenshots",
     videosFolder: "cypress/videos",
     video: true,

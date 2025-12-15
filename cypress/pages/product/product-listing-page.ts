@@ -1,5 +1,6 @@
-import { AppUrls } from "@constants/urls/app-urls";
 import { BasePage } from "@pages/base/base-page";
+
+import { AppUrls } from "@constants/urls/app-urls";
 
 export class ProductListingPage extends BasePage {
   private readonly advancedSearchCheckbox = "#As";
@@ -11,13 +12,13 @@ export class ProductListingPage extends BasePage {
   private readonly priceToInput = "#Pt";
   private readonly searchDescriptionsCheckbox = "#Sid";
   private readonly searchButton = ".search-button";
+  private readonly subCategoryGrid = ".sub-category-grid";
 
   public readonly productItems = ".product-item";
   public readonly productTitles = ".product-title a";
   public readonly productPrices = ".prices";
   public readonly noResultsMessage = ".search-results .result";
-  private readonly subCategoryGrid = ".sub-category-grid";
-  public pageTitle = ".page-title h1";
+  public readonly pageTitle = ".page-title h1";
 
   public goToPage(): void {
     super.goToPage(AppUrls.SEARCH);

@@ -1,24 +1,27 @@
 {
-  "name": "s_p_task",
+  "name": "coffemug-qa-task-cypress-official",
   "version": "1.0.0",
-  "description": "",
+  "description": "Cypress + TypeScript E2E tests for Demo Web Shop",
   "main": "index.js",
+  "type": "commonjs",
   "scripts": {
-    "test": "npx cypress run",
     "test:chrome": "npx cypress run --browser chrome",
     "test:firefox": "npx cypress run --browser firefox",
     "test:edge": "npx cypress run --browser edge",
     "test:headed": "npx cypress open",
-    "test:headless": "npx cypress run"
+    "test:headless": "npx cypress run",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "format:check": "prettier --check .",
+    "format:write": "prettier --write ."
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "devDependencies": {
     "@faker-js/faker": "^10.1.0",
     "@types/node": "^24.9.1",
     "cypress": "^14.5.4",
+    "prettier": "^3.5.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
   }

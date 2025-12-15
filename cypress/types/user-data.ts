@@ -4,5 +4,5 @@ export interface RegisterData {
   email: string;
   password: string;
   confirmPassword: string;
-  gender?: "male" | "female";
+  gender: "male" | "female";
 }

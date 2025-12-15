@@ -27,6 +27,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Typecheck
+        run: npm run typecheck
+
       - name: Verify Cypress binary
         run: npx cypress verify
 
@@ -34,7 +37,7 @@ jobs:
         env:
           CYPRESS_loginEmail: ${{ secrets.CYPRESS_loginEmail }}
           CYPRESS_loginPassword: ${{ secrets.CYPRESS_loginPassword }}
-        run: npx cypress run --browser ${{ matrix.browser }}
+        run: npm run test:${{ matrix.browser }}
 
       - name: Upload Cypress Artifacts on failure
         if: failure()
@@ -44,5 +47,6 @@ jobs:
           path: |
             cypress/videos/
             cypress/screenshots/
-            cypress/reports/
+            cypress/downloads/
+            cypress/results/
           if-no-files-found: ignore

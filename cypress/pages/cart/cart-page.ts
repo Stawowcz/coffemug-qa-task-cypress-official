@@ -1,15 +1,17 @@
-import { AppUrls } from "@constants/urls/app-urls";
 import { BasePage } from "@pages/base/base-page";
 
+import { AppUrls } from "@constants/urls/app-urls";
+
 export class CartPage extends BasePage {
+  private readonly updateCartButton = 'input[name="updatecart"]';
+  private readonly couponField = 'input[name="discountcouponcode"]';
+  private readonly applyCouponButton = 'input[name="applydiscountcouponcode"]';
+
   public readonly cartItemRow = ".cart-item-row";
   public readonly productName = ".product-name";
   public readonly unitPrice = ".product-unit-price";
   public readonly qtyInput = ".qty-input";
   public readonly subtotal = ".product-subtotal";
-  private updateCartButton = 'input[name="updatecart"]';
-  private readonly couponField = 'input[name="discountcouponcode"]';
-  private readonly applyCouponButton = 'input[name="applydiscountcouponcode"]';
   public readonly couponValidationMessage = ".message";
 
   public goToPage(): void {

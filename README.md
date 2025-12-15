@@ -32,7 +32,7 @@ Architecture: **Page Object Model (POM)** + shared **utils** (e.g. cart cleanup)
 │   │   └── product/
 │   │       ├── add-to-cart.spec.ts
 │   │       └── product-search-and-filter.spec.ts
-│   │
+│
 │   ├── pages/
 │   │   ├── base/
 │   │   │   └── base-page.ts
@@ -46,7 +46,7 @@ Architecture: **Page Object Model (POM)** + shared **utils** (e.g. cart cleanup)
 │   │   │   └── product-details-page.ts
 │   │   └── cart/
 │   │       └── cart-page.ts
-│   │
+│
 │   ├── constants/
 │   │   ├── navigation/
 │   │   │   ├── categories.ts
@@ -62,35 +62,38 @@ Architecture: **Page Object Model (POM)** + shared **utils** (e.g. cart cleanup)
 │   │       │   └── search-messages.ts
 │   │       └── validation/
 │   │           └── register-validations.ts
-│   │
+│
 │   ├── data/
 │   │   ├── coupon-data.ts
 │   │   ├── product-data.ts
 │   │   ├── search-data.ts
 │   │   └── user-generator-data.ts
-│   │
+│
 │   ├── utils/
 │   │   └── cart-utils.ts
-│   │
+│
 │   ├── support/
 │   │   ├── auth-session.ts
 │   │   ├── commands.ts
 │   │   └── e2e.ts
-│   │
-│   └── types/
-│       └── user-data.ts
+│
+│   ├── types/
+│   │   └── user-data.ts
+│
+│   ├── downloads/           # ignored (artifacts)
+│   ├── screenshots/         # ignored (artifacts)
+│   ├── videos/              # ignored (artifacts)
+│   └── results/             # ignored (artifacts)
 │
 ├── README.md
 ├── NOTES.md
 ├── .gitignore
 ├── package-lock.json
 ├── cypress.config.ts
-├── cypress.env.json        # not committed
-├── package.json
+├── cypress.env.json # not committed
 ├── cypress.example.env.json # template
+├── package.json
 └── tsconfig.json
-
-
 
 ```
 
@@ -133,6 +136,7 @@ cp cypress.example.env.json cypress.env.json
 
 ```bash
 npx cypress open
+# or
 npm run test:headed
 ```
 
@@ -140,6 +144,7 @@ npm run test:headed
 
 ```bash
 npx cypress run
+# or
 npm run test:headless
 ```
 

@@ -5,7 +5,9 @@
     "strict": true,
     "esModuleInterop": true,
     "moduleResolution": "node",
+    "skipLibCheck": true,
     "baseUrl": "./",
+    "types": ["cypress", "node"],
     "paths": {
       "@pages/*": ["cypress/pages/*"],
       "@e2e/*": ["cypress/e2e/*"],

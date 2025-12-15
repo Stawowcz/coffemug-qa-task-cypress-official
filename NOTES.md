@@ -2,42 +2,51 @@
 
 This document describes key decisions, assumptions, known limitations, and one thing intentionally not implemented for this Cypress + TypeScript E2E task against **Demo Web Shop** (https://demowebshop.tricentis.com).
 
-
 ---
 
 ## Key decisions
 
 ### 1) Page Object Model (POM) + “safe” helpers
+
 - Tests use **Page Object Model** classes (e.g. `HomePage`, `ProductListingPage`, `ProductDetailsPage`, `CartPage`).
 - Common Cypress interactions are wrapped in `BasePage` helpers (`safeClick`, `safeType`, `safeCheck`, `safeSelect`) to reduce flakiness and avoid repeating `should("be.visible")` / retry patterns in every test.
 
 ### 2) Product Listing Page (PLP) as a shared abstraction
+
 - The demo shop uses similar “listing” layouts for:
   - `/search?...`
   - category pages like `/desktops`
 - Because selectors and behaviors overlap (product tiles, titles, prices, filters), the project uses a **single listing page object** (`ProductListingPage`) instead of duplicating the same methods in separate “SearchPage” and “CategoryPage” objects.
 
 ### 3) Avoiding unstable ordering
+
 - Product ordering can change (sorting, paging, server-side changes).
 - Tests prefer **selecting by product name** (e.g. `openProductByName(name)`) over clicking the “first” product to keep them deterministic.
 
 ### 4) Handling “0 results” edge case in search
+
 - Search scenario explicitly checks for the “No products were found…” message.
 - If there are no results, tests switch to advanced search and apply filters (category + price range + “search in descriptions”) and then verify results.
 
 ### 5) Authentication optimization via `cy.session`
+
 - For suites that require a logged-in state, tests use a reusable helper (e.g. `loginWithSession()`).
 - This reduces repeated UI logins, speeds up execution, and stabilizes tests.
 - Registration tests deliberately do **not** use `cy.session`, because they validate the full registration/login/logout flow end-to-end.
 
 ### 6) Cart state cleanup via a utility
+
 - Some flows depend on the cart being empty before the test starts.
 - A utility (`CartUtils.ensureEmptyCart()`) normalizes state using the **existing UI flow** (open cart → set quantity to 0 → update).
 - This prevents “test pollution” between runs and avoids false failures.
 
 ### 7) Test data centralized in `data/` and `constants/`
+
 - Product names, slugs, prices, coupon messages, search inputs etc. are stored in dedicated modules to avoid hardcoding in tests.
 - “Navigation definitions” (categories/subcategories + paths/titles) are treated as **constants** because they describe app navigation, not dynamic test data.
+
+### 8) Retry logic in run mode
+- To reduce flaky failures in CI, Cypress retries are enabled in run mode (`retries.runMode = 2`, `retries.openMode = 0` in `cypress.config.ts`).
 
 ---
 
@@ -66,7 +75,7 @@ This document describes key decisions, assumptions, known limitations, and one t
 
 I intentionally did not implement:
 
-- a separate **Remove item** flow (e.g., remove checkbox/button), and  
+- a separate **Remove item** flow (e.g., remove checkbox/button), and
 - a **valid coupon** scenario that applies a real discount,
 
 because:
@@ -77,8 +86,8 @@ because:
 
 If this were a real project, I would add a valid coupon test only when a stable, controlled test coupon exists (or is guaranteed by the test environment), and then validate:
 
-- discounted totals,  
-- clear UI feedback,  
+- discounted totals,
+- clear UI feedback,
 - coupon persistence across refresh.
 
 ---

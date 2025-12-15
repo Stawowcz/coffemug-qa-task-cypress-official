@@ -5,6 +5,7 @@ export class HomePage extends BasePage {
   public readonly loginLink = 'a[href="/login"]';
   public readonly logoutLink = 'a[href="/logout"]';
   public readonly accountLabel = ".account";
+
   private readonly searchInput = "#small-searchterms";
   private readonly searchButton =
     'form[action="/search"] input[type="submit"][value="Search"]';
@@ -13,14 +14,6 @@ export class HomePage extends BasePage {
   private readonly cartLink = "#topcartlink";
 
   private readonly categoryNavigation = ".block-category-navigation";
-
-  public getCategorySelector(categoryPath: string): string {
-    return `${this.categoryNavigation} a[href='/${categoryPath}']`;
-  }
-
-  public openCategory(categoryPath: string): void {
-    this.safeClick(this.getCategorySelector(categoryPath));
-  }
 
   public goToPage(): void {
     super.goToPage();
@@ -49,5 +42,13 @@ export class HomePage extends BasePage {
 
   public getCartQty(): Cypress.Chainable<JQuery<HTMLElement>> {
     return cy.get(this.cartQty);
+  }
+
+  public getCategorySelector(categoryPath: string): string {
+    return `${this.categoryNavigation} a[href='/${categoryPath}']`;
+  }
+
+  public openCategory(categoryPath: string): void {
+    this.safeClick(this.getCategorySelector(categoryPath));
   }
 }

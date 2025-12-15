@@ -1,10 +1,13 @@
 /// <reference types="cypress" />
+
 import { LoginPage } from "@pages/auth/login-page";
-import { HomePage } from "@pages/home/home-page";
-import { RegisterMessages } from "@constants/texts/messages/register-messages";
-import { GlobalUiTexts } from "@constants/texts/ui-texts/global-ui-texts";
 import { RegisterPage } from "@pages/auth/register-page";
+import { HomePage } from "@pages/home/home-page";
+
+import { RegisterMessages } from "@constants/texts/messages/register-messages";
 import { RegisterValidations } from "@constants/texts/validation/register-validations";
+import { GlobalUiTexts } from "@constants/texts/ui-texts/global-ui-texts";
+
 import { UserDataGenerator } from "@data/user-generator-data";
 
 describe("User Registration and Login", () => {
@@ -22,10 +25,9 @@ describe("User Registration and Login", () => {
 
     registerPage.fillRegistrationForm(registerData);
 
-    cy.get(registerPage.resultMessage).should(
-      "contain.text",
-      RegisterMessages.REGISTRATION_SUCCESS,
-    );
+    cy.get(registerPage.resultMessage)
+      .should("be.visible")
+      .and("contain.text", RegisterMessages.REGISTRATION_SUCCESS);
 
     registerPage.clickContinue();
 
@@ -33,8 +35,8 @@ describe("User Registration and Login", () => {
   });
 
   it("should log in successfully with valid credentials", () => {
-    const email = Cypress.env("loginEmail");
-    const password = Cypress.env("loginPassword");
+    const email = Cypress.env("loginEmail") as string;
+    const password = Cypress.env("loginPassword") as string;
 
     homePage.openLoginPage();
     loginPage.login(email, password);
@@ -44,14 +46,15 @@ describe("User Registration and Login", () => {
   });
 
   it("should keep user logged in after page refresh", () => {
-    const email = Cypress.env("loginEmail");
-    const password = Cypress.env("loginPassword");
+    const email = Cypress.env("loginEmail") as string;
+    const password = Cypress.env("loginPassword") as string;
 
     homePage.openLoginPage();
     loginPage.login(email, password);
 
     cy.get(homePage.accountLabel).should("contain.text", email);
     cy.get(homePage.logoutLink).should("have.text", GlobalUiTexts.LOGOUT);
+
     cy.reload();
 
     cy.get(homePage.accountLabel).should("contain.text", email);
@@ -59,8 +62,8 @@ describe("User Registration and Login", () => {
   });
 
   it("should log out the user successfully", () => {
-    const email = Cypress.env("loginEmail");
-    const password = Cypress.env("loginPassword");
+    const email = Cypress.env("loginEmail") as string;
+    const password = Cypress.env("loginPassword") as string;
 
     homePage.openLoginPage();
     loginPage.login(email, password);
@@ -111,8 +114,10 @@ describe("User Registration - Field Validation", () => {
     const wrongEmail = UserDataGenerator.generateRegisterData({
       email: "wrongemail",
     });
+
     registerPage.typeEmail(wrongEmail.email);
     registerPage.clickPassword();
+
     cy.get(registerPage.emailError).should(
       "contain.text",
       RegisterValidations.WRONG_EMAIL,
@@ -122,9 +127,11 @@ describe("User Registration - Field Validation", () => {
       password: "123",
       confirmPassword: "123",
     });
+
     registerPage.typePassword(shortPassword.password);
     registerPage.typeConfirmPassword(shortPassword.confirmPassword);
     registerPage.clickFirstName();
+
     cy.get(registerPage.passwordError).should(
       "contain.text",
       RegisterValidations.SHORT_PASSWORD,
@@ -134,9 +141,11 @@ describe("User Registration - Field Validation", () => {
       password: "Test123",
       confirmPassword: "Different123",
     });
+
     registerPage.typePassword(mismatchPasswords.password);
     registerPage.typeConfirmPassword(mismatchPasswords.confirmPassword);
     registerPage.clickLastName();
+
     cy.get(registerPage.confirmPasswordError).should(
       "contain.text",
       RegisterValidations.PASSWORD_MISMATCH,

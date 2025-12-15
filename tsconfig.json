@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "baseUrl": "./",
+    "paths": {
+      "@pages/*": ["cypress/pages/*"],
+      "@e2e/*": ["cypress/e2e/*"],
+      "@constants/*": ["cypress/constants/*"],
+      "@data/*": ["cypress/data/*"],
+      "@typing/*": ["cypress/types/*"],
+      "@fixtures/*": ["cypress/fixtures/*"],
+      "@utils/*": ["cypress/utils/*"]
+    }
+  },
+  "include": ["cypress/**/*.ts"]
+}

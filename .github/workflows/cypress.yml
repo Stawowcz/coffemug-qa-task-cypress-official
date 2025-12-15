@@ -1,0 +1,48 @@
+name: Cypress E2E Tests
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [Main]
+  pull_request:
+    branches: [Main]
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        browser: [chrome, firefox]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify Cypress binary
+        run: npx cypress verify
+
+      - name: Run Cypress tests on ${{ matrix.browser }}
+        env:
+          CYPRESS_loginEmail: ${{ secrets.CYPRESS_loginEmail }}
+          CYPRESS_loginPassword: ${{ secrets.CYPRESS_loginPassword }}
+        run: npx cypress run --browser ${{ matrix.browser }}
+
+      - name: Upload Cypress Artifacts on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-artifacts-${{ matrix.browser }}
+          path: |
+            cypress/videos/
+            cypress/screenshots/
+            cypress/reports/
+          if-no-files-found: ignore

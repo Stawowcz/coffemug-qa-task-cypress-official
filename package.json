@@ -1,0 +1,25 @@
+{
+  "name": "s_p_task",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx cypress run",
+    "test:chrome": "npx cypress run --browser chrome",
+    "test:firefox": "npx cypress run --browser firefox",
+    "test:edge": "npx cypress run --browser edge",
+    "test:headed": "npx cypress open",
+    "test:headless": "npx cypress run"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@faker-js/faker": "^10.1.0",
+    "@types/node": "^24.9.1",
+    "cypress": "^14.5.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}

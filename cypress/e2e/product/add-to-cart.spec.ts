@@ -47,12 +47,24 @@ describe("Add to Cart - Smartphone Scenario", () => {
     homePage.openCart();
 
     cy.get(cartPage.cartItemRow).should("exist");
-    cy.get(cartPage.productName).should("have.text", ProductData.SMARTPHONE.name);
+    cy.get(cartPage.productName).should(
+      "have.text",
+      ProductData.SMARTPHONE.name,
+    );
 
     cy.get(cartPage.cartItemRow).within(() => {
-      cy.get(cartPage.unitPrice).should("have.text", ProductData.SMARTPHONE.price);
-      cy.get(cartPage.qtyInput).should("have.value", ProductData.SMARTPHONE.quantity);
-      cy.get(cartPage.subtotal).should("have.text", ProductData.SMARTPHONE.subtotal);
+      cy.get(cartPage.unitPrice).should(
+        "have.text",
+        ProductData.SMARTPHONE.price,
+      );
+      cy.get(cartPage.qtyInput).should(
+        "have.value",
+        ProductData.SMARTPHONE.quantity,
+      );
+      cy.get(cartPage.subtotal).should(
+        "have.text",
+        ProductData.SMARTPHONE.subtotal,
+      );
     });
   });
 
@@ -67,6 +79,9 @@ describe("Add to Cart - Smartphone Scenario", () => {
     cartPage.clickUpdateCart();
 
     cy.get(cartPage.qtyInput).should("have.value", "2");
-    cy.get(cartPage.subtotal).should("not.contain", ProductData.SMARTPHONE.subtotal);
+    cy.get(cartPage.subtotal).should(
+      "not.contain",
+      ProductData.SMARTPHONE.subtotal,
+    );
   });
 });

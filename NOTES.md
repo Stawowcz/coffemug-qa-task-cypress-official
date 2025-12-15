@@ -46,6 +46,7 @@ This document describes key decisions, assumptions, known limitations, and one t
 - “Navigation definitions” (categories/subcategories + paths/titles) are treated as **constants** because they describe app navigation, not dynamic test data.
 
 ### 8) Retry logic in run mode
+
 - To reduce flaky failures in CI, Cypress retries are enabled in run mode (`retries.runMode = 2`, `retries.openMode = 0` in `cypress.config.ts`).
 
 ---

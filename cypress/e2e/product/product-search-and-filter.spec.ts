@@ -44,7 +44,10 @@ describe("Product Searching and Filtering", () => {
         productListingPage.selectCategory(Categories.ELECTRONICS.title);
         productListingPage.enableSubcategories();
         productListingPage.selectManufacturer(GlobalUiTexts.MANUFACTURER_ALL);
-        productListingPage.setPriceRange(SearchData.PRICE_FROM, SearchData.PRICE_TO);
+        productListingPage.setPriceRange(
+          SearchData.PRICE_FROM,
+          SearchData.PRICE_TO,
+        );
         productListingPage.enableSearchInDescriptions();
         productListingPage.clickSearch();
 
@@ -62,7 +65,10 @@ describe("Product Searching and Filtering", () => {
           const value = parseFloat($price.text().replace(/[^0-9.]/g, ""));
 
           if (!Number.isNaN(value)) {
-            expect(value).to.be.within(SearchData.PRICE_FROM, SearchData.PRICE_TO);
+            expect(value).to.be.within(
+              SearchData.PRICE_FROM,
+              SearchData.PRICE_TO,
+            );
           }
         });
 
@@ -74,7 +80,9 @@ describe("Product Searching and Filtering", () => {
         .and(($items) => expect($items.length).to.be.greaterThan(0));
 
       cy.get(productListingPage.productTitles).each(($el) => {
-        expect($el.text().toLowerCase()).to.contain(Categories.ELECTRONICS.title);
+        expect($el.text().toLowerCase()).to.contain(
+          Categories.ELECTRONICS.title,
+        );
       });
     });
   });
@@ -88,20 +96,27 @@ describe("Product Searching and Filtering", () => {
     productListingPage.openSubCategory(Subcategories.DESKTOPS.slug);
     productListingPage.expectUrlContains(Subcategories.DESKTOPS.path);
 
-    cy.get(productListingPage.pageTitle).should("have.text", Subcategories.DESKTOPS.title);
+    cy.get(productListingPage.pageTitle).should(
+      "have.text",
+      Subcategories.DESKTOPS.title,
+    );
 
     cy.get(productListingPage.productItems)
       .should("exist")
       .and("have.length.greaterThan", 0);
 
-    productListingPage.openProductByName(ProductData.BUILD_YOUR_OWN_COMPUTER.name);
+    productListingPage.openProductByName(
+      ProductData.BUILD_YOUR_OWN_COMPUTER.name,
+    );
 
     cy.get(productDetailsPage.title).should(
       "contain.text",
       ProductData.BUILD_YOUR_OWN_COMPUTER.name,
     );
 
-    productDetailsPage.expectUrlContains(ProductData.BUILD_YOUR_OWN_COMPUTER.path);
+    productDetailsPage.expectUrlContains(
+      ProductData.BUILD_YOUR_OWN_COMPUTER.path,
+    );
 
     cy.get(productDetailsPage.productPrice).should(
       "contain.text",

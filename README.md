@@ -101,8 +101,8 @@ Architecture: **Page Object Model (POM)** + shared **utils** (e.g. cart cleanup)
 Clone this repository and install dependencies:
 
 ```bash
-git clone https://github.com/Stawowcz/coffemug-qa-task-cypress.git
-cd coffemug-qa-task-cypress
+git clone https://github.com/Stawowcz/coffemug-qa-task-cypress-official.git
+cd coffemug-qa-task-cypress-official
 npm install
 # CI uses: npm ci
 ```

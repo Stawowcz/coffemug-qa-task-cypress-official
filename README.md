@@ -185,4 +185,4 @@ GitHub Actions workflow automatically runs Cypress tests in **Chrome** and **Fir
 - Reports test results directly in the **GitHub Actions** tab
 - Uses retry logic to reduce flaky failures (retries.runMode = 2, retries.openMode = 0 in cypress.config.ts)
 
----
+## Submission: PR for recruitment task.

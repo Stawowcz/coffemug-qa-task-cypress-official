@@ -19,8 +19,14 @@ export class CartUtils {
 
         if (qty > 0) {
           homePage.openCart();
-          cartPage.updateQuantity(0);
+          cartPage.setAllQuantities(0);
           cartPage.clickUpdateCart();
+
+          cy.get(cartPage.cartItemRow).should("not.exist");
+          homePage
+            .getCartQty()
+            .should("be.visible")
+            .and("have.text", CartUtils.cartQtyText(0));
         }
       });
   }

@@ -38,4 +38,10 @@ export class CartPage extends BasePage {
   public clickUpdateCart(): void {
     this.safeClick(this.updateCartButton);
   }
+
+  public setAllQuantities(qty: number): void {
+    cy.get(this.qtyInput).each(($input) => {
+      cy.wrap($input).clear().type(String(qty));
+    });
+  }
 }

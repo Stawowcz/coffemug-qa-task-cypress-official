@@ -159,8 +159,8 @@ npm run test:edge
 
 GitHub Actions workflow automatically runs Cypress tests in **Chrome** and **Firefox** under the following conditions:
 
-- On **push** to the `Main` branch
-- On **pull requests** targeting `Main`
+- On **push** to the `main` branch
+- On **pull requests** targeting `main`
 - On **manual trigger** via the GitHub Actions tab (`workflow_dispatch`)
 
 ### CI File Location
